@@ -1,4 +1,4 @@
-package Library;
+package admin;
 import java.util.Scanner;
 
 public class Signup {
@@ -6,13 +6,13 @@ public class Signup {
 
  public void signup(Adminlog[] adminDatabase){
     System.out.println();
-    System.out.println("**********Signup Form**********");
+    System.out.println("****Signup Form****");
     Scanner sc=new Scanner(System.in);
 
    
-    System.out.println("Enter Id:-");
+    System.out.println("Enter Your Id:-");
     String adminId =sc.nextLine();
-    System.out.println("Enter Passwd:-");
+    System.out.println("Enter Password:-");
     String adminpass =sc.nextLine();
 
     Adminlog obj1=new Adminlog(adminId, adminpass);

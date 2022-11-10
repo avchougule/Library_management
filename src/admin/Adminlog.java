@@ -1,5 +1,7 @@
-package Library;
+package admin;
 import java.util.Scanner;
+import Library.AddBooksForm;
+import Library.ShowBooks;
 
 public class Adminlog {
 
@@ -22,11 +24,13 @@ public class Adminlog {
 
 void Librarydisplay(){
     System.out.println();
-    System.out.println("*********** Welcome To the Library ***********");
-            System.out.println("1.Add Books");
-            System.out.println("2.Show Books");
-            System.out.println("3.Exist");
-            System.out.println("Enter your option");
+    System.out.println("**** Welcome To the Library ****");
+            System.out.println("1.Add Student");
+            System.out.println("2.Display Student");
+            System.out.println("3.Add Books");
+            System.out.println("4.Show Books");
+            System.out.println("5.Exist");
+            System.out.println("Enter your option:");
             int a=sc.nextInt();
             switch (a) {
                 case 1:callAddBooksForms();
@@ -54,7 +58,7 @@ AddBooksForm objaddbook=new AddBooksForm();
         Scanner obj=new Scanner(System.in);
         int index=0;
         while (true){
-            objaddbook.addBooksForm(BooksDatabase,index);
+            objaddbook.AddBooksForm(BooksDatabase,index);
             String flag="no";
             System.out.println("add one more book (yes/no): ");
             String choose=obj.nextLine();

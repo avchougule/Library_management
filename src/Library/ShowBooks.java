@@ -17,7 +17,7 @@ public class ShowBooks {
 
   public void showBooks(ShowBooks[] booksDatabase) {
     System.out.println();
-    System.out.println("************* Show Books *************");
+    System.out.println("**** Show Books ****");
     int id=1;
     for(ShowBooks books:booksDatabase){
        if (books==null){

@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class AddBooksForm {
 
 
-  void addBooksForm(ShowBooks[] booksDatabase,int index){
+  public void AddBooksForm(ShowBooks[] booksDatabase,int index){
     System.out.println();
-    System.out.println("**********Add Books Form**********");
+    System.out.println("****Add Books Form****");
     Scanner sc=new Scanner(System.in);
 
     System.out.println("Enter Author Name:-");

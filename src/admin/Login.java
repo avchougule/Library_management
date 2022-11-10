@@ -1,4 +1,4 @@
-package Library;
+package admin;
 
 import java.util.Scanner;
 
@@ -16,11 +16,10 @@ public class Login {
 
     public void display(){
         System.out.println();
-        System.out.println("************** Fabtech Libray Mangement Application *************");
+        System.out.println("Library Management Application");
         System.out.println("1.Login");
-        System.out.println("2.Sign up");
-        System.out.println("3.Exit");   
-        System.out.println("Enter your option");
+        System.out.println("2.Sign up"); 
+        System.out.println("Enter your option:(Please sign up first, if you have login id ignoe it.)\n");
         int a=sc.nextInt();
         switch (a) {
             case 1:obj.loginForm(adminDatabase);
@@ -29,13 +28,11 @@ public class Login {
             
             case 2: callsignup();
                 display();
-                break;
-            
-            case 3:
-                break;   
+                break; 
                  
             default:
-                break;
+            System.out.println("Enter valid number.");
+                
         }
     }   
 }
