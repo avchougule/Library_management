@@ -1,126 +1,106 @@
 package admin;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Scanner;
-import Library.AddBooksForm;
-import Library.ShowBooks;
 
 public class Adminlog {
 
-    Scanner sc = new Scanner(System.in);   
-    String adminId;
-    String adminpass;
-    
+    Scanner sc = new Scanner(System.in);
+    private String user_name;
+    private String password;
 
-    public Adminlog(String adminId, String adminpass) {
-        this.adminId = adminId;
-        this.adminpass = adminpass;
+    public Adminlog(String user_name, String password) {
+        this.user_name = user_name;
+        this.password = password;
     }
-    
+
     public Adminlog() {
-       
+
     }
 
+    // ---------------- dash board ---------------------------
 
-
-
-void Librarydisplay(){
-    System.out.println();
-    System.out.println("**** Welcome To the Library ****");
-            System.out.println("1.Add Student");
-            System.out.println("2.Display Student");
-            System.out.println("3.Add Books");
-            System.out.println("4.Show Books");
-            System.out.println("5.Exist");
-            System.out.println("Enter your option:");
-            int a=sc.nextInt();
-            switch (a) {
-                case 1:callAddBooksForms();
-                    break;
-                
-                case 2:objbook.showBooks(BooksDatabase); 
-                    break;
-                
-                case 3:
-                    break;   
-                     
-                default:
-                    break;
-            }
-}
-
-
-
-
-
-AddBooksForm objaddbook=new AddBooksForm();
-    
-    ShowBooks[] BooksDatabase=new ShowBooks[100];
-    void callAddBooksForms(){
-        Scanner obj=new Scanner(System.in);
-        int index=0;
-        while (true){
-            objaddbook.AddBooksForm(BooksDatabase,index);
-            String flag="no";
-            System.out.println("add one more book (yes/no): ");
-            String choose=obj.nextLine();
-            
-            System.out.println("Add Book Successflly !!!");
-            index++;
-            if (choose.equals(flag)){
-                
+    static void dashboard() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        System.out.println("**** Welcome To the Library ****");
+        System.out.println("1.Students Record");
+        System.out.println("2.Book Records");
+        System.out.println("3.Manage Books");
+        System.out.println("4.logout");
+        System.out.println("Enter your option");
+        int a = sc.nextInt();
+        BookRecords obj = new BookRecords();
+        StudentsRecord obj1 = new StudentsRecord();
+        switch (a) {
+            case 1:
+                obj1.studentRecord();
+                Adminlog.dashboard();
                 break;
-            }
-            
+
+            case 2:
+                obj.Librarydisplay();
+                Adminlog.dashboard();
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                break;
+
+            default:
+                break;
         }
-        
-        
-  }
+    }
 
-     ShowBooks objbook=new ShowBooks(); 
+    // ----------------Login Form-------------------------------
 
+   // BookRecords obj = new BookRecords();
+    //StudentsRecord obj1 = new StudentsRecord();
 
-
-    public void loginForm(Adminlog[] adminDatabase){
+    public void loginForm() {
         System.out.println();
         System.out.println("************* Login page *************");
-        System.out.println("Enter Id:-");
-        String adminId =sc.nextLine();
+        System.out.println("Enter User Name:-");
+        String user_name = sc.next();
 
         System.out.println("Enter Password:-");
-        String adminpass =sc.nextLine();
-        
-        if (adminDatabase[0]==null){
-            System.out.println("Incorrect id or Password Try again. (--- please signup first ---) ");
-        }
-            
-        else if (adminDatabase[0].adminId.equals(adminId) && adminDatabase[0].adminpass.equals(adminpass)) {
-            System.out.println("Login Successful !!!");
-            System.out.println();
-            System.out.println("*********** Welcome To the Library ***********");
-            System.out.println("1.Add Books");
-            System.out.println("2.Show Books");
-            System.out.println("3.Exist");
-            System.out.println("Enter your option");
-            int a=sc.nextInt();
-            switch (a) {
-                case 1:callAddBooksForms();
-                Librarydisplay();
-                    break;
-                
-                case 2:objbook.showBooks(BooksDatabase); 
-                Librarydisplay();
-                    break;
-                
-                case 3:
-                    break;   
-                     
-                default:
-                    break;
-            }
-        } 
-        else {
-            System.out.println("Incorrect id or Password Try again. ");
-        }
-    }
+        String password = sc.next();
 
+        try {
+            
+            Connection con = ConnectionProvider.createConnection();
+            Statement stmt = con.createStatement();
+            ResultSet admins = stmt.executeQuery("select * from Admins");
+            boolean match = false;
+         
+            while (admins.next()) {
+              
+                if (admins.getString("user_name").equals(user_name)  && admins.getString("password").equals(password)) {
+                    match = true;
+                    break;
+                }              
+            }
+
+            if (match) {
+                System.out.println("Login Successful !!!");
+                dashboard();
+
+            } else {
+                System.out.println("Incorrect User Name or Password Try again. ");
+
+            }
+
+        } 
+        catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+       
+
+    }
 
 }
